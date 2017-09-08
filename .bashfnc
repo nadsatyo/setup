@@ -1,0 +1,104 @@
+TEMPLATE_DIR='~/bin/tt2'
+
+function yf() { 
+    firefox "http://finance.yahoo.com/q?s=$1" 
+}
+
+
+# Generate a new perl script
+function newpl(){
+	tpage --define name=$1.pl $TEMPLATE_DIR/newpl.tt > $1.pl
+}
+
+# Generate a new C++ class/header
+function newclass(){
+	tpage --define name=$1 $TEMPLATE_DIR/header.tt > $1.h
+	tpage --define name=$1 $TEMPLATE_DIR/class.tt > $1.cpp
+}
+function newmakefile(){
+	tpage --eval_perl --define name=$1 $TEMPLATE_DIR/makefile.tt > makefile
+}
+
+# print a time stamp (used mostly for filenames)
+function tstamp(){ 
+	date +%Y%m%dT%H%M%S 
+}
+
+# print a date stamp (used mostly for filenames)
+function dstamp(){ 
+	date +%Y%m%d 
+}
+
+function yest(){
+	date +%Y%m%d --date='yesterday'
+}
+
+
+
+# find a file
+function ff() { find . -name '*'$1'*' ; }
+function ffi() { find . -iname '*'$1'*' ; }
+
+# find a file and run $2 on it 
+function fe() { find . -name '*'$1'*' -exec $2 {} \; ; }  
+
+# find a string in a set of files
+function fstr() 
+{
+  if [ "$#" -gt 2 ]; then
+    echo "Usage: fstr \"pattern\" [files] "
+    return;
+  fi
+  SMSO=$(tput smso)
+  RMSO=$(tput rmso)
+  find . -type f -name "${2:-*}" -print | xargs grep -sin "$1" | \
+    sed "s/$1/$SMSO$1$RMSO/gI"
+}
+
+#-----------------------------------
+# Process/system related functions:
+#-----------------------------------
+
+function myps() { ps $@ -u $USER -o pid,ppid,%cpu,%mem,start,bsdtime,command ; }
+function pp() { myps f | awk '!/awk/ && $0~var' var=${1:-".*"} ; }
+
+function ii()   # get current host related info
+{
+  echo -e "\nYou are logged on ${RED}$HOST"
+  echo -e "\nAdditionnal information:$NC " ; uname -a
+  echo -e "\n${RED}Users logged on:$NC " ; w -h
+  echo -e "\n${RED}Current date :$NC " ; date
+  echo -e "\n${RED}Machine stats :$NC " ; uptime
+  echo -e "\n${RED}Memory stats :$NC " ; free
+  my_ip 2>&- ;
+  echo -e "\n${RED}Local IP Address :$NC" ; echo ${MY_IP:-"Not connected"}
+  echo -e "\n${RED}ISP Address :$NC" ; echo ${MY_ISP:-"Not connected"}
+  echo
+}
+
+
+# runs a program and outputs the elapsed time
+# (d'oh! found out that "time" does the same thing)
+function timeit()
+{
+  if [ -n "$1" ]; then
+    d1=`date` 
+    let t1=`date +%s`
+    "$@"
+    d2=`date` 
+    let t2=`date +%s`
+    let elapse=$t2-$t1
+    let minutes=$elapse/60
+    let seconds=$elapse%60
+    echo  
+    echo "+------------- timeit results ------------+"
+    echo " start time: $d1 "
+    echo " end time:   $d2 "
+    #echo " elapsed:    $minutes minutes, $seconds seconds "
+    echo " elapsed:   $elapse "
+    echo "+-----------------------------------------+"
+  else
+    echo "usage: timeit command-to-run-and-time" 
+  fi
+}
+
