@@ -77,9 +77,6 @@ MapToggle <F9> paste
 map <S-F11> :NERDTreeToggle<enter><C-w>h
 map <S-F12> :Tlist<enter><C-w>h
 
-":NERDTreeToggle<enter><C-w>h
-
-
 set tags=./tags,~/ccts/tags,~/bin/tags/ccts_tags,~/bin/tags/std_tags,~/bin/tags/boost_tags
 
 " Visual Tabbing like textpad: (s-tab doesn't work)
