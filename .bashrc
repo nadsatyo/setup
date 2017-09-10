@@ -76,6 +76,7 @@ alias llr="ls -l --dereference --color=auto"
 alias lar="ls -FCa --dereference --color=auto"
 alias llar="ls -la --dereference --color=auto"
 
+alias tree="tree -C"
 alias grep="grep --color"
 alias grepcpp="grep -R --include='*.cpp'"
 alias greph="grep -R --include='*.h'"
@@ -117,6 +118,8 @@ stty erase ^?
 export INPUTRC=~/.inputrc
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+
+
 
 #--------------------------------------------------
 # Prompts

@@ -15,8 +15,24 @@ Plugin 'Buffergator'
 Plugin 'taglist.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 
+" Untested__
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" " Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+
 filetype plugin indent on
 " End vundle
+
+"Untested__vundle_related__settings
+  " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<c-b>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+  " If you want :UltiSnipsEdit to split your window.
+  let g:UltiSnipsEditSplit="vertical"
+"end
 
 set vb
 set noerrorbells
@@ -27,7 +43,6 @@ set ts=2
 set sw=2
 set textwidth=0
 set et 
-
 set hlsearch
 
 "--------------------------------------------------
@@ -46,13 +61,6 @@ endif
 " Mappings
 "-------------------------------------------------- 
 
-"" OMNICPPCOMPLETE
-set nocp
-filetype plugin on
-
-" Appease my fat fingers 
-command! -nargs=0 W exec 'write'
-
 " Map key to toggle opt 
 function MapToggle(key, opt) 
   let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>" 
@@ -61,28 +69,24 @@ function MapToggle(key, opt)
 endfunction 
 command -nargs=+ MapToggle call MapToggle(<f-args>)
 
-
-MapToggle <S-F11> paste
-MapToggle <F8>  number
-
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-" Run gnumake
-map <F9> :w<ENTER>:make optimize=0<ENTER>
-
-" Toggle tag list
+MapToggle <F8>  number
+MapToggle <F9> paste
+map <S-F11> :NERDTreeToggle<enter><C-w>h
 map <S-F12> :Tlist<enter><C-w>h
 
+":NERDTreeToggle<enter><C-w>h
 
-" Visual Tabbing like textpad: (s-tab doesn't work)
-inoremap <S-Tab> <C-O><LT><LT>
-nnoremap <Tab> >>
-nnoremap <C-Tab> <LT><LT>
-vnoremap <Tab> >gv
-vnoremap <C-Tab> <LT>gv
 
 set tags=./tags,~/ccts/tags,~/bin/tags/ccts_tags,~/bin/tags/std_tags,~/bin/tags/boost_tags
 
-set ts=2
-set sw=2
+" Visual Tabbing like textpad: (s-tab doesn't work)
+"inoremap <S-Tab> <C-O><LT><LT>
+"nnoremap <Tab> >>
+"nnoremap <C-Tab> <LT><LT>
+"vnoremap <Tab> >gv
+"vnoremap <C-Tab> <LT>gv
+
+
