@@ -18,7 +18,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 " Untested__
 " Track the engine.
 Plugin 'SirVer/ultisnips'
-" " Snippets are separated from the engine. Add this if you want them:
+" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 
 
@@ -27,23 +27,26 @@ filetype plugin indent on
 
 "Untested__vundle_related__settings
   " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<c-b>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-  " If you want :UltiSnipsEdit to split your window.
-  let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/UltiSnips','UltiSnips']
 "end
 
 set vb
 set noerrorbells
 set autoindent
 set backspace=indent,eol,start
-syntax enable
-set ts=2
+syntax enable 
+set ts=2 
 set sw=2
 set textwidth=0
 set et 
 set hlsearch
+set nocp
 
 "--------------------------------------------------
 " GVim Specific Settings
