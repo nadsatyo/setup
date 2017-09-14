@@ -15,11 +15,9 @@ Plugin 'Buffergator'
 Plugin 'taglist.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 
-" Untested__
-" Track the engine.
 Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+Plugin 'Valloric/YouCompleteMe.git'
 
 
 filetype plugin indent on
@@ -27,13 +25,14 @@ filetype plugin indent on
 
 "Untested__vundle_related__settings
   " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-c>"
 let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/UltiSnips','UltiSnips']
+let g:ultisnips_python_style='google'
 "end
 
 set vb
