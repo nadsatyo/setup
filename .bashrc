@@ -41,6 +41,7 @@ set -o vi
 #-------------------------------------------------- 
 alias perl_traceerror='perl -MCarp::Always'
 alias docker='sudo docker'
+alias start-mono='mono --debug /opt/NzbDrone/NzbDrone.exe'
 
 #tmux
 source ~/.tmuxinator.bash
